@@ -1,0 +1,89 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "wheel_9",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 8,
+  "sample": 8,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "Wheel/wheelBackg": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 2,
+              "value": -1440
+            },
+            {
+              "frame": 4,
+              "value": -2520
+            },
+            {
+              "frame": 6,
+              "value": -3240
+            },
+            {
+              "frame": 6.875,
+              "value": -3506.1964166666667
+            },
+            {
+              "frame": 7.5,
+              "value": -3603.461
+            },
+            {
+              "frame": 8,
+              "value": -3635
+            }
+          ]
+        }
+      },
+      "wheelBackg": {
+        "props": {
+          "angle": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 2,
+              "value": -1440
+            },
+            {
+              "frame": 4,
+              "value": -2520
+            },
+            {
+              "frame": 6,
+              "value": -3240
+            },
+            {
+              "frame": 6.875,
+              "value": -3723.2018365384615
+            },
+            {
+              "frame": 7.625,
+              "value": -3812.763125
+            },
+            {
+              "frame": 8,
+              "value": -3836.057
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 8,
+      "func": "onAnimationFinished",
+      "params": []
+    }
+  ]
+}
