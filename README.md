@@ -2,7 +2,7 @@
 ## Simple game made with Cocos Engine.
 
 * #### Game client is made with JavaScript and located in WheelOfFortune folder.
-* #### Game server is made with NodeJS and located in WheelOfFortuneServer folder. For storing data at the server uses Sqlite3 Database.
+* #### Game server is made with NodeJS and located in WheelOfFortuneServer folder. For storing data server uses Sqlite3 Database.
 
 # Screenshots
 
