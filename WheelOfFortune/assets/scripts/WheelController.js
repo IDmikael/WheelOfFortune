@@ -73,6 +73,7 @@ var WheelController = cc.Class({
     spinWheel(){
 
         if (this.foolModeValue){
+            this.backg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.defaultTexture);
             var anim = this.getComponent(cc.Animation);
             cc.audioEngine.playEffect(this.wheel_sound, false);
             anim.play("wheel_0");
