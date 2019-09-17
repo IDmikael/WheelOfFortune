@@ -1,3 +1,5 @@
+import { instance } from 'WheelController';
+
 var MainSceneUI = cc.Class({
     extends: cc.Component,
 
@@ -29,8 +31,8 @@ var MainSceneUI = cc.Class({
 
         this.btnSpin.interactable = false;
        
-        var WheelController = require('WheelController');
-        WheelController.instance.spinWheel();
+        
+        instance.spinWheel();
     },
 
     onBackPressed(){
@@ -47,10 +49,10 @@ var MainSceneUI = cc.Class({
 
         cc.audioEngine.playEffect(this.audio_button, false);
         
-        var WheelController = require('WheelController');
-        WheelController.instance.foolModeValue = !WheelController.instance.foolModeValue;
-        WheelController.instance.foolMode(WheelController.instance.foolModeValue);
-        cc.log("fool mode: " + WheelController.instance.foolModeValue);
+        // var WheelController = require('WheelController');
+        instance.foolModeValue = !instance.foolModeValue;
+        instance.foolMode(instance.foolModeValue);
+        cc.log("fool mode: " + instance.foolModeValue);
     },
 
     updateScore(){

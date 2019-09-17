@@ -7,14 +7,14 @@ const db = new sqlite.Database(':memory:', (err) => {
     console.log('Connected to db');
 
     var segmentsTableCreateQuery = `
-    CREATE TABLE IF NOT EXISTS 
+    CREATE TABLE  
     segments (
      seg_id INTEGER PRIMARY KEY AUTOINCREMENT,
      seg_value INTEGER NOT NULL UNIQUE
     );`;
 
     var scoreTableCreateQuery = `
-    CREATE TABLE IF NOT EXISTS
+    CREATE TABLE 
     score (
      sc_id INTEGER PRIMARY KEY AUTOINCREMENT,
      sc_value INTEGER NOT NULL UNIQUE

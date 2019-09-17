@@ -65,11 +65,6 @@ var WheelController = cc.Class({
 
     },
 
-    start(){
-        var MainSceneUI = require('MainSceneUI');
-        cc.log("kjasn" + MainSceneUI.instance);
-    },
-
     spinWheel(){
 
         if (this.foolModeValue){
