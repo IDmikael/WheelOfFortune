@@ -2,6 +2,30 @@ const db = require('../db/db');
 
 function getSegments(req, res) {
     //Сделать запрос в базу и, если неn ошибок, отдать segments
+    
+    var segmentsArray;
+    let isSegmentsCreated = false;
+
+    db.getSegments((segments) => {
+        if (segments.length == 0) {
+            segmentsArray = createSegments();
+            db.setSegments(segmentsArray);
+
+            console.log("Segments created");
+
+            res.status(200).json({segmentsArray});
+        }
+        else {
+            segmentsArray = segments;
+
+            console.log("Segments received: ", segmentsArray);
+
+            res.status(200).json({segmentsArray});
+        }
+    });
+}
+
+function createSegments(){
     var segmentsArray = [];
     var coefficient = 1;
 
@@ -16,9 +40,7 @@ function getSegments(req, res) {
         segmentsArray[segmentsArray.length] = segmentsArray[segmentsArray.length - 1] + (coefficient * randomNumber * 100);
     }
 
-    db.setSegments(segmentsArray);
-
-    res.status(200).json({segmentsArray});
+    return segmentsArray;
 }
 
 module.exports = {getSegments};
