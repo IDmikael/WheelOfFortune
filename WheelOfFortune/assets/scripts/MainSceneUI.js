@@ -1,4 +1,5 @@
 import { instance } from 'WheelController';
+import NetworkManager from 'NetworkManager';
 
 var MainSceneUI = cc.Class({
     extends: cc.Component,
@@ -21,7 +22,7 @@ var MainSceneUI = cc.Class({
     // LIFE-CYCLE CALLBACKS:
     onLoad(){
         MainSceneUI.instance = this;
-        this.updateScore();
+        NetworkManager.getScore(this, this.updateScore);
     },
 
     onSpinPressed(){
@@ -55,17 +56,8 @@ var MainSceneUI = cc.Class({
         cc.log("fool mode: " + instance.foolModeValue);
     },
 
-    updateScore(){
-        let request = cc.loader.getXMLHttpRequest();
-        request.open("GET", "localhost:3000/score", true);
-		request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-		request.onreadystatechange = () => {
-			if (request.readyState == 4 && request.response != undefined) {
-                let scoreNum = Number(JSON.parse(request.response).score);
-                this.score.string = this.nFormatter(scoreNum, 3);
-			}
-		};
-		request.send();       
+    updateScore(scoreNum){
+        this.score.string = this.nFormatter(scoreNum, 3);       
     },
 
     nFormatter(num, digits) {

@@ -1,3 +1,5 @@
+import NetworkManager from 'NetworkManager';
+
 cc.Class({
     extends: cc.Component,
 

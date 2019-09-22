@@ -1,3 +1,5 @@
+import NetworkManager from 'NetworkManager';
+
 var WheelController = cc.Class({
     extends: cc.Component,
 
@@ -49,24 +51,18 @@ var WheelController = cc.Class({
             this.segments.push(0);
         }
 
-        var req = cc.loader.getXMLHttpRequest();
-        req.open("GET", 'localhost:3000/segments');
-        req.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-		req.onreadystatechange = () => {
-			if (req.readyState == 4 && req.response != undefined){
-                this.segments = [];
-                JSON.parse(req.response).segmentsArray.forEach((elem, id) => {
-                    this.wheelBackg.getChildByName("l" + id).getComponent(cc.Label).string = "" + elem;
-                    this.segments.push(elem);
-                });
-            }
-        }
-        req.send();
+        NetworkManager.getSegments(this, this.getSegmetsArray);
+    },
 
+    getSegmetsArray(segmentsArray){
+        this.segments = [];
+        segmentsArray.forEach((elem, id) => {
+            this.wheelBackg.getChildByName("l" + id).getComponent(cc.Label).string = "" + elem;
+            this.segments.push(elem);
+        });
     },
 
     spinWheel(){
-
         if (this.foolModeValue){
             this.backg.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.defaultTexture);
             var anim = this.getComponent(cc.Animation);
@@ -75,20 +71,13 @@ var WheelController = cc.Class({
             return;
         }
 
-        let request = cc.loader.getXMLHttpRequest();
-        request.open("POST", "localhost:3000/spin", true);
-		request.setRequestHeader("Content-Type","application/json;charset=UTF-8");
-		request.onreadystatechange = () => {
-			if (request.readyState == 4 && request.response != undefined) {
-                let rand = Number(JSON.parse(request.response).selectedSegment);
-                cc.log("returned random: ", rand);
-                
-                var anim = this.getComponent(cc.Animation);
-                anim.play("wheel_" + rand);
-                cc.audioEngine.playEffect(this.wheel_sound, false);
-			}
-		};
-		request.send();
+        NetworkManager.spinWheel(this, this.playWheelAnim);
+    },
+
+    playWheelAnim(rand){
+        var anim = this.getComponent(cc.Animation);
+        anim.play("wheel_" + rand);
+        cc.audioEngine.playEffect(this.wheel_sound, false);
     },
 
     onAnimationFinished(){
@@ -98,7 +87,7 @@ var WheelController = cc.Class({
         }   
 
         var MainSceneUI = require('MainSceneUI');
-        MainSceneUI.instance.updateScore();
+        NetworkManager.getScore(MainSceneUI.instance, MainSceneUI.instance.updateScore);
         MainSceneUI.instance.btnSpin.interactable = true;
     },
     
